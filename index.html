@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Control Center · Digital Services Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0A0A0A;--mut:#6B6B6B;--line:#E4E4E4;--soft:#F5F5F5;--bg:#fff;color-scheme:light;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans',system-ui,'Segoe UI',Arial,sans-serif;line-height:1.65;font-size:15px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 clamp(18px,4vw,48px)}
+header{border-bottom:1px solid var(--ink)}
+.bar{display:flex;justify-content:space-between;align-items:center;padding:18px 0;gap:16px;flex-wrap:wrap}
+.brand{font-weight:700;font-size:18px;letter-spacing:-.01em}
+.live{display:inline-flex;align-items:center;gap:9px;font-size:14px}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--ink);animation:p 2s infinite}
+@keyframes p{50%{opacity:.25}}
+.tabs{display:flex;gap:28px;overflow-x:auto;scrollbar-width:none}
+.tabs button{all:unset;cursor:pointer;white-space:nowrap;padding:10px 0 12px;color:var(--mut);font-size:15px;border-bottom:2px solid transparent}
+.tabs button:hover{color:var(--ink)}
+.tabs button[aria-selected=true]{color:var(--ink);font-weight:600;border-bottom-color:var(--ink)}
+.tabs .add{margin-inline-start:auto;color:var(--ink);text-decoration:underline;text-underline-offset:5px}
+button:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.note{margin:22px 0 0;font-size:13.5px;color:var(--mut);border:1px solid var(--line);padding:9px 14px;border-radius:4px;background:var(--soft)}
+.tool{display:flex;justify-content:space-between;align-items:center;margin-top:44px;flex-wrap:wrap;gap:14px}
+.tool h1{font-size:14px;font-weight:400;color:var(--mut)}
+.link{color:var(--ink);font-weight:600;text-underline-offset:4px;margin-inline-start:12px}
+.seg{display:flex;border:1px solid var(--ink);border-radius:4px;overflow:hidden}
+.seg button{all:unset;cursor:pointer;padding:6px 18px;font-size:13.5px}
+.seg button[aria-pressed=true]{background:var(--ink);color:#fff}
+.seg button:focus-visible{outline-offset:-3px;outline-color:#888}
+.hero h2{font-size:clamp(36px,6.4vw,78px);font-weight:700;line-height:1.08;letter-spacing:-.035em;margin-top:18px;max-width:15ch}
+.hero p{margin-top:18px;color:var(--mut);max-width:60ch}
+.heatwrap{margin-top:38px;overflow-x:auto;padding:4px 4px 8px}
+.heat{min-width:640px;display:grid;grid-template-columns:48px repeat(24,1fr);gap:3px;align-items:center}
+.heat .d{font-size:13px}
+.heat .h{font-size:11px;color:var(--mut);text-align:center;white-space:nowrap}
+.c{aspect-ratio:1.4;border-radius:2px;background:color-mix(in srgb,var(--ink) calc(var(--v)*100%),#fff);box-shadow:inset 0 0 0 1px var(--line);cursor:crosshair}
+.c.peak{outline:2px solid var(--ink);outline-offset:2px}
+#readout{margin-top:14px;font-size:14px;color:var(--mut);min-height:26px}
+#readout b{color:var(--ink);font-weight:600}
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);margin-top:56px;border-top:1px solid var(--ink)}
+.kpi{padding:22px 20px 22px 0;border-inline-end:1px solid var(--line);margin-inline-end:20px}
+.kpi:last-child{border:0}
+.kpi b{display:block;font-size:clamp(30px,3.6vw,46px);font-weight:700;line-height:1.15;letter-spacing:-.03em}
+.kpi span{display:block;font-size:13.5px;color:var(--mut);margin-top:4px}
+.kpi i{font-style:normal;font-size:13px;margin-top:8px;display:block}
+.sec{margin-top:64px}
+.two{display:grid;grid-template-columns:1.25fr 1fr;gap:56px}
+.three{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:56px}
+h3{font-size:19px;font-weight:700;padding-top:14px;border-top:1px solid var(--ink);letter-spacing:-.01em}
+.sub{font-size:13.5px;color:var(--mut);margin:2px 0 22px}
+.cols{display:flex;align-items:flex-end;gap:3px;height:170px;border-bottom:1px solid var(--ink)}
+.cols div{flex:1;background:var(--ink);height:var(--p);min-width:2px}
+.cols div:hover{background:var(--mut)}
+.step{margin-bottom:16px}
+.step .t{display:flex;justify-content:space-between;gap:10px;font-size:14.5px}
+.step .t em{font-style:normal;color:var(--mut);white-space:nowrap}
+.track{height:8px;background:var(--soft);margin-top:6px;box-shadow:inset 0 0 0 1px var(--line)}
+.track div{height:100%;width:var(--p);background:var(--ink)}
+table{width:100%;border-collapse:collapse;font-size:14.5px}
+th{font-weight:400;color:var(--mut);font-size:13px;text-align:start;padding-bottom:8px}
+td{padding:11px 0;border-top:1px solid var(--line)}
+.row{display:flex;align-items:center;gap:12px;font-size:14.5px;padding:7px 0}
+.row .track{flex:1;margin:0}
+.row span:first-child{min-width:104px}
+.row span:last-child{min-width:38px;text-align:end;color:var(--mut)}
+.gap{height:26px}
+.feed{list-style:none;padding:0;font-size:14.5px}
+.feed li{padding:11px 0;border-top:1px solid var(--line);display:flex;gap:18px}
+.feed li span:first-child{color:var(--mut);min-width:76px}
+footer{margin-top:90px;border-top:1px solid var(--ink);padding:20px 0 40px;font-size:13px;color:var(--mut)}
+dialog{border:1px solid var(--ink);border-radius:4px;padding:28px;max-width:min(520px,92vw);font-family:inherit;color:var(--ink)}
+dialog::backdrop{background:rgba(0,0,0,.55)}
+dialog h3{border:0;padding:0;margin-bottom:8px}
+dialog p{font-size:14.5px;color:var(--mut)}
+pre{direction:ltr;text-align:left;background:var(--soft);border:1px solid var(--line);padding:12px;font-size:12.5px;margin:16px 0;white-space:pre-wrap}
+dialog button{all:unset;cursor:pointer;margin-top:18px;padding:8px 22px;background:var(--ink);color:#fff;border-radius:4px;font-size:14px}
+@media(max-width:900px){.kpis{grid-template-columns:repeat(2,1fr)}.kpi{border:0;border-top:1px solid var(--line);margin:0;padding:18px 0}.two,.three{grid-template-columns:1fr;gap:48px}.sec{margin-top:52px}}
+@media(prefers-reduced-motion:reduce){.dot{animation:none}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+ <div class="bar"><div class="brand">Digital Services Group</div><div class="live"><span class="dot"></span><span><b id="liveN">0</b> visitors on your sites right now</span></div></div>
+ <nav class="tabs" id="tabs" role="tablist"></nav>
+</div></header>
+<main class="wrap">
+ <p class="note">These are sample numbers to preview the final design. They become real once your sites are connected to a tracking tool.</p>
+ <div class="tool"><h1 id="siteName"></h1><div class="seg" id="range"><button data-r="7" aria-pressed="true">7 days</button><button data-r="30" aria-pressed="false">30 days</button><button data-r="90" aria-pressed="false">90 days</button></div></div>
+ <section class="hero">
+  <h2 id="headline"></h2>
+  <p id="lead"></p>
+  <div class="heatwrap"><div class="heat" id="heat"></div></div>
+  <div id="readout">Hover over or tap any square to see how busy that day and hour is.</div>
+ </section>
+ <div class="kpis" id="kpis"></div>
+ <div class="sec two">
+  <section><h3>Visits per day</h3><p class="sub" id="barsSub"></p><div class="cols" id="bars"></div></section>
+  <section><h3>What visitors do on the site</h3><p class="sub">From first arrival to getting in touch</p><div id="journey"></div></section>
+ </div>
+ <div class="sec three">
+  <section><h3>Top pages</h3><p class="sub">Visits, time spent and exit rate</p><table id="pages"></table></section>
+  <section><h3>Where they come from</h3><p class="sub">Traffic source</p><div id="src"></div></section>
+  <section><h3>Device and country</h3><p class="sub">Share of visitors</p><div id="dev"></div></section>
+ </div>
+ <section class="sec"><h3>Happening now</h3><p class="sub">Latest visitor activity</p><ul class="feed" id="feed"></ul></section>
+</main>
+<footer><div class="wrap">Digital Services Group</div></footer>
+<dialog id="dlg">
+ <h3>Connect a new site</h3>
+ <p>Each site needs one line of code added to its pages. I prepare it and add it for you, then the site shows up here automatically.</p>
+ <pre>&lt;script defer src="https://your-tracking-tool/script.js"
+  data-website-id="site-id"&gt;&lt;/script&gt;</pre>
+ <p>This snippet is only an illustration. The real address is set once we choose the tracking tool.</p>
+ <button id="closeBtn">Got it</button>
+</dialog>
+<script>
+const DAYS=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+const DS=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+const J0='Entered the site';
+const SITES=[
+ {n:'WebVie',u:'https://webdvie.github.io/co/',s:7,k:1,p:['Home','Services','Projects','Pricing','Start a project'],j:[J0,'Viewed services','Opened pricing','Opened the project form'],g:'Sent a project request'},
+ {n:'Nexvaro',u:'https://nexvaro.github.io/CEO/',s:19,k:.6,p:['Home','Solutions','Industries','About','Contact'],j:[J0,'Viewed solutions','Read about the team','Opened contact'],g:'Clicked the email link'}];
+let cur=0,range=7;
+const f=n=>Math.round(n).toLocaleString('en-US');
+const hl=h=>(h%12||12)+' '+(h<12?'AM':'PM');
+const $=id=>document.getElementById(id);
+function rng(a){return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function gen(i,rg){
+ const S=SITES[i],r=rng(S.s*100+rg);
+ const hw=h=>.12+.9*Math.exp(-((h-21)**2)/16)+.5*Math.exp(-((h-13)**2)/12);
+ const dw=[.85,.92,1,1.12,.68,.9,.8],cells=[];let sum=0;
+ for(let d=0;d<7;d++)for(let h=0;h<24;h++){const v=hw(h)*dw[d]*(.8+r()*.4);cells.push(v);sum+=v}
+ const visitors=Math.round(rg*S.k*(110+r()*40)),sessions=Math.round(visitors*1.28);
+ const nb=rg==7?7:30,bars=[];
+ for(let b=0;b<nb;b++)bars.push((.6+r()*.5)*(1+b/nb*.35));
+ return{visitors,sessions,heat:cells.map(v=>v/sum*sessions),bars,dur:95+Math.round(r()*90),bounce:38+Math.round(r()*14),conv:Math.round(sessions*(.035+r()*.02)),d:[0,0,0,0].map(()=>Math.round((r()*24-6)*10)/10),r};
+}
+function share(items,r){const w=items.map(x=>x[1]*(.85+r()*.3)),t=w.reduce((a,b)=>a+b);return items.map((x,i)=>[x[0],w[i]/t*100])}
+function bars(l){return l.map(([n,p])=>`<div class="row"><span>${n}</span><div class="track"><div style="--p:${p}%"></div></div><span>${f(p)}%</span></div>`).join('')}
+function render(){
+ const S=SITES[cur],D=gen(cur,range),r=D.r;
+ $('siteName').innerHTML=`${S.n}<a class="link" href="${S.u}" target="_blank" rel="noopener">Open site</a>`;
+ let mx=0,mi=0;D.heat.forEach((v,i)=>{if(v>mx){mx=v;mi=i}});
+ $('headline').textContent=`Your visitors peak on ${DAYS[Math.floor(mi/24)]} at ${hl(mi%24)}`;
+ $('lead').textContent='This is the best time to run an ad, publish new content, or be online to answer messages. Each square is one hour of the week: the darker it is, the busier your site.';
+ let h='<span></span>';for(let x=0;x<24;x++)h+=`<span class="h">${x%3==0?hl(x):''}</span>`;
+ for(let d=0;d<7;d++){h+=`<span class="d">${DS[d]}</span>`;for(let x=0;x<24;x++){const i=d*24+x;h+=`<div class="c${i==mi?' peak':''}" tabindex="0" data-i="${i}" style="--v:${Math.max(.03,D.heat[i]/mx*.95)}"></div>`}}
+ $('heat').innerHTML=h;
+ const show=e=>{const c=e.target.closest('.c');if(!c)return;const i=+c.dataset.i;$('readout').innerHTML=`<b>${DAYS[Math.floor(i/24)]} at ${hl(i%24)}</b>: about ${f(D.heat[i]/range*7)} visits in this hour`};
+ $('heat').onmouseover=show;$('heat').onclick=show;$('heat').onfocusin=show;
+ const dl=v=>`<i>${v>=0?'+':'−'}${f(Math.abs(v))}% vs previous period</i>`;
+ const m=Math.floor(D.dur/60),s=D.dur%60;
+ $('kpis').innerHTML=[[f(D.visitors),'Visitors',D.d[0]],[f(D.sessions),'Visits',D.d[1]],[`${m}:${String(s).padStart(2,'0')}`,'Avg. time on site (min)',D.d[2]],[f(D.bounce)+'%','Left immediately',-D.d[3]/2],[f(D.conv),'Got in touch',D.d[3]]].map(k=>`<div class="kpi"><b>${k[0]}</b><span>${k[1]}</span>${dl(k[2])}</div>`).join('');
+ const mb=Math.max(...D.bars);
+ $('bars').innerHTML=D.bars.map(v=>`<div style="--p:${v/mb*100}%"></div>`).join('');
+ $('barsSub').textContent=range==90?'Each bar is about 3 days':'Each bar is one day';
+ const j=[[S.j[0],1],[S.j[1],.62],[S.j[2],.34],[S.j[3],.12],[S.g,D.conv/D.sessions]];
+ $('journey').innerHTML=j.map(([n,k])=>`<div class="step"><div class="t"><span>${n}</span><em>${f(D.sessions*k)} · ${f(k*100)}%</em></div><div class="track"><div style="--p:${k*100}%"></div></div></div>`).join('');
+ const W=[1,.62,.38,.17,.11],P=S.p.map((n,i)=>[n,W[i]]);
+ $('pages').innerHTML='<tr><th>Page</th><th>Visits</th><th>Time</th><th>Exit</th></tr>'+P.map(([n,k])=>{const t=20+Math.round(r()*110);return`<tr><td>${n}</td><td>${f(D.sessions*k)}</td><td>${Math.floor(t/60)}:${String(t%60).padStart(2,'0')}</td><td>${f(25+r()*40)}%</td></tr>`}).join('');
+ $('src').innerHTML=bars(share([['Google',38],['Facebook',24],['Instagram',17],['WhatsApp',11],['Direct link',10]],r));
+ $('dev').innerHTML=bars(share([['Mobile',76],['Desktop',20],['Tablet',4]],r))+'<div class="gap"></div>'+bars(share([['Egypt',40],['France',22],['United States',18],['Saudi Arabia',12],['Other',8]],r));
+}
+function mkTabs(){$('tabs').innerHTML=SITES.map((s,i)=>`<button role="tab" data-i="${i}" aria-selected="${i==cur}">${s.n}</button>`).join('')+'<button class="add" id="addBtn">Connect a new site</button>';$('addBtn').onclick=()=>$('dlg').showModal()}
+$('tabs').onclick=e=>{const b=e.target.closest('[data-i]');if(!b)return;cur=+b.dataset.i;mkTabs();render();feedReset()};
+$('range').onclick=e=>{const b=e.target.closest('button');if(!b)return;range=+b.dataset.r;[...$('range').children].forEach(x=>x.setAttribute('aria-pressed',x==b));render()};
+$('closeBtn').onclick=()=>$('dlg').close();
+const EV=['viewed the pricing page','arrived from Google on the home page','clicked the contact link','submitted the request form','read the services page','arrived from Instagram','came back after two days'];
+const CT=['Cairo','Alexandria','Riyadh','Dubai','Paris','London','New York'];
+function feedReset(){$('feed').innerHTML='';for(let i=0;i<4;i++)addEv()}
+function addEv(){const li=document.createElement('li');const t=new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});li.innerHTML=`<span>${t}</span><span>Visitor from ${CT[Math.floor(Math.random()*CT.length)]} ${EV[Math.floor(Math.random()*EV.length)]}</span>`;$('feed').prepend(li);while($('feed').children.length>6)$('feed').lastChild.remove()}
+let live=5;function tick(){live=Math.max(1,live+Math.round(Math.random()*2-1));$('liveN').textContent=f(live*2+1)}
+mkTabs();render();feedReset();tick();setInterval(addEv,5000);setInterval(tick,3000);
+</script>
+</body>
+</html>
